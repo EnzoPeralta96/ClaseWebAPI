@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
+
 builder.Services.AddSingleton<string>(CadenaDeConexion);
 
 builder.Services.AddScoped<ITareaRepository, TareaRepository>();

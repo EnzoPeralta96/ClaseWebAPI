@@ -7,14 +7,19 @@ public class Tarea
     private string descripcion;
     private Estado estado;
 
-    private DateTime fechaCreacion;
-
     public int Id { get => id; set => id = value; }
     public string Titulo { get => titulo; set => titulo = value; }
     public string Descripcion { get => descripcion; set => descripcion = value; }
     public Estado Estado { get => estado; set => estado = value; }
     public Tarea()
     {
+    }
+
+    public Tarea(CreateTareaViewModels tarea_vm)
+    {
+        titulo = tarea_vm.Titulo;
+        descripcion = tarea_vm.Descripcion;
+        estado = tarea_vm.Estado;
     }
 
     public string GetTitulo()
