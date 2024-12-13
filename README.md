@@ -59,17 +59,12 @@ a la db en el appsentings.json :
 
 -Obtenemos la cadena de conexión del appsettings.json:
 
-```
-  string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
+ string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
 
 - Inyectamos la cadena de conexión:
-
-```
   builder.Services.AddSingleton<string>(CadenaDeConexion);
 
 - Inyectamos el repo:
-
-
   builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 
 * Una vez que ya tenemos configurada las dependencias en el programa, podemos inyectarla el repo en el controlador.
