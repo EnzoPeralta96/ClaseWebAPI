@@ -23,13 +23,18 @@ Tabla tarea de la base de datos tarea.tb:
 - dotnet add package Microsoft.Data.SQLite
 
 - agregar la configuración del proyecto en el  csproj
-/*
+
+
+Para que el fragmento de código que compartiste se vea correctamente en un archivo README.md en GitHub, necesitas formatearlo como un bloque de código utilizando las comillas invertidas triples (```). En tu caso, también puedes especificar el lenguaje de marcado para que tenga un resaltado sintáctico adecuado. Si quieres resaltar el XML, utiliza xml después de las comillas triples.
+
+Aquí está cómo debería verse en el README.md:
+
+```xml
 <ItemGroup>
     <None Update="DB\tarea.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 </ItemGroup>
-*/
 
 - Implementar el patrón repositorio
 * interfaz (donde definiremos las acciones que queremos que haga el repo)
@@ -52,9 +57,14 @@ a la db en el appsentings.json :
   Luego en el program:
   Obtener la cadena de conexión e inyectarla:
 
+-Obtenemos la cadena de conexión del appsettings.json:
   string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
 
+- Inyectamos la cadena de conexión:
   builder.Services.AddSingleton<string>(CadenaDeConexion);
+
+- Inyectamos el repo:
+  builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 
 * Una vez que ya tenemos configurada las dependencias en el programa, podemos inyectarla el repo en el controlador.
 
