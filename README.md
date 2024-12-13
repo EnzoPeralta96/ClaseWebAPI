@@ -23,24 +23,40 @@ Tabla tarea de la base de datos tarea.tb:
 - dotnet add package Microsoft.Data.SQLite
 
 - agregar la configuración del proyecto en el  csproj
+/*
 <ItemGroup>
     <None Update="DB\tarea.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 </ItemGroup>
+*/
 
 - Implementar el patrón repositorio
 * interfaz (donde definiremos las acciones que queremos que haga el repo)
 * implementación de la interfaz (donde implemtamos como queremos que se realicen esas acciones)
+
 
 Una vez que ya tenemos nuetros modelos y el acceso a datos, estamos en condiciones de crear el controlador
 y sus respectivos endpoints.
 Observación: luego realizaremos validaciones de los modelos utilizando viewmodels.
 
 5 - Creal el controlador, en este caso, TareaController
-* Como necesitamos acceder a los métodos del repo en el controlador, los instanciamos en un principio.
-* Inicialmente instanciamos el repo, luego implementamos la inyección de dependencias.
-* Instanciar el repo, indicando la cadena de conexión: Data Source=DB/nombre_db;Cache=Shared
+* Como necesitamos acceder a los métodos del repo en el controlador , lo inyectamos.
+Para poder realizar la inyeccion de dependencias debemos guardar la cadena de conexión 
+a la db en el appsentings.json : 
+
+/*"ConnectionStrings": {
+    "SqliteConexion": "Data Source=Db/tarea.db;"
+  }*/
+
+  Luego en el program:
+  Obtener la cadena de conexión e inyectarla:
+
+  string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
+
+  builder.Services.AddSingleton<string>(CadenaDeConexion);
+
+* Una vez que ya tenemos configurada las dependencias en el programa, podemos inyectarla el repo en el controlador.
 
 6 - Crear endpoints
 

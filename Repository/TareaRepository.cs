@@ -55,5 +55,34 @@ public class TareaRepository : ITareaRepository
         return tarea;
     }
 
+   
+    public List<Tarea> GetTareas()
+    {
+        string query = "SELECT * FROM tarea";
+        List<Tarea> tareas = new();
+        using (SqliteConnection conexion = new SqliteConnection(_cadenaDeConexion))
+        {
+            conexion.Open();
+            SqliteCommand command = new SqliteCommand(query, conexion);
+
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var tarea = new Tarea
+                    {
+                        Id = Convert.ToInt32(reader["id"]),
+                        Titulo = reader["titulo"].ToString(),
+                        Descripcion = reader["descripcion"].ToString(),
+                        Estado = (Estado)Convert.ToInt32(reader["estado"])
+                    };
+                    tareas.Add(tarea);
+                }
+            }
+            conexion.Close();
+        }
+        return tareas;
+    }
+
 
 }
