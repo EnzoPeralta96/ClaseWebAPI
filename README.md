@@ -20,14 +20,11 @@ Tabla tarea de la base de datos tarea.tb:
 
 4 - Repositorio
  Instalar dependencia para utilizar SQLite con ADO.Net
+ 
+```xml
 - dotnet add package Microsoft.Data.SQLite
 
 - agregar la configuración del proyecto en el  csproj
-
-
-Para que el fragmento de código que compartiste se vea correctamente en un archivo README.md en GitHub, necesitas formatearlo como un bloque de código utilizando las comillas invertidas triples (```). En tu caso, también puedes especificar el lenguaje de marcado para que tenga un resaltado sintáctico adecuado. Si quieres resaltar el XML, utiliza xml después de las comillas triples.
-
-Aquí está cómo debería verse en el README.md:
 
 ```xml
 <ItemGroup>
@@ -50,20 +47,28 @@ Observación: luego realizaremos validaciones de los modelos utilizando viewmode
 Para poder realizar la inyeccion de dependencias debemos guardar la cadena de conexión 
 a la db en el appsentings.json : 
 
-/*"ConnectionStrings": {
+
+```xml
+"ConnectionStrings": {
     "SqliteConexion": "Data Source=Db/tarea.db;"
-  }*/
+  }
 
   Luego en el program:
   Obtener la cadena de conexión e inyectarla:
 
 -Obtenemos la cadena de conexión del appsettings.json:
+
+```xml
   string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
 
 - Inyectamos la cadena de conexión:
+
+```xml
   builder.Services.AddSingleton<string>(CadenaDeConexion);
 
 - Inyectamos el repo:
+
+```xml
   builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 
 * Una vez que ya tenemos configurada las dependencias en el programa, podemos inyectarla el repo en el controlador.
