@@ -27,7 +27,7 @@ Tabla tarea de la base de datos tarea.tb:
 
 - agregar la configuración del proyecto en el  csproj
 
-```
+```xml
 <ItemGroup>
     <None Update="DB\tarea.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
