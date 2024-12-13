@@ -1,4 +1,5 @@
 # ClaseWebAPI
+
 Implementación de una API REST FULL con C# y el framework de .NET
 
 Pasos para implementar la API:
@@ -21,12 +22,12 @@ Tabla tarea de la base de datos tarea.tb:
 4 - Repositorio
  Instalar dependencia para utilizar SQLite con ADO.Net
  
-```xml
+
 - dotnet add package Microsoft.Data.SQLite
 
 - agregar la configuración del proyecto en el  csproj
 
-```xml
+```
 <ItemGroup>
     <None Update="DB\tarea.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -48,7 +49,7 @@ Para poder realizar la inyeccion de dependencias debemos guardar la cadena de co
 a la db en el appsentings.json : 
 
 
-```xml
+```
 "ConnectionStrings": {
     "SqliteConexion": "Data Source=Db/tarea.db;"
   }
@@ -58,17 +59,17 @@ a la db en el appsentings.json :
 
 -Obtenemos la cadena de conexión del appsettings.json:
 
-```xml
+```
   string CadenaDeConexion = builder.Configuration.GetConnectionString("SqliteConexion")!.ToString();
 
 - Inyectamos la cadena de conexión:
 
-```xml
+```
   builder.Services.AddSingleton<string>(CadenaDeConexion);
 
 - Inyectamos el repo:
 
-```xml
+
   builder.Services.AddScoped<ITareaRepository, TareaRepository>();
 
 * Una vez que ya tenemos configurada las dependencias en el programa, podemos inyectarla el repo en el controlador.
